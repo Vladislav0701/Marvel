@@ -26,6 +26,7 @@ class CharInfo extends Component {
         }
     }
 
+
     updateChar = () => {
         const {charId} = this.props;
         if (!charId) {
@@ -78,17 +79,25 @@ class CharInfo extends Component {
 
 const View = ({char}) => {
     const {name, description, thumbnail, homepage, wiki, comics} = char;
-    const element = comics.map((item) => {
+    const comicsData = comics.map((item, i) => {
         return (
-            <li >
+            <li key={i} className='char__comics-item'>
                 {item.name}
             </li>
         )
     })
+
+    const element = comicsData.length > 10 ? comicsData.slice(0, 10) : 'No comics for this character';
+
+    let imgStyle = {'objectFit' : 'cover'};
+    if (thumbnail === 'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg') {
+        imgStyle = {'objectFit' : 'contain'};
+    }
+
     return (
         <>
             <div className="char__basics">
-                <img src={thumbnail} alt={name}/>
+                <img src={thumbnail} alt={name} style={imgStyle}/>
                 <div>
                     <div className="char__info-name">{name}</div>
                     <div className="char__btns">
