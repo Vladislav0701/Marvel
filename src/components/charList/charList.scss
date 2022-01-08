@@ -5,8 +5,15 @@
         margin-top: 50px;
         display: grid;
         grid-template-columns: 650px 425px;
+        grid-template-rows: 0fr 2fr; 
         column-gap: 25px;
         align-items: start;
+        grid-template-areas: 
+            "content info"
+            "content find"; 
+    }
+    &__list {
+        grid-area: content;
     }
     &__grid {
         display: grid;
