@@ -6,6 +6,7 @@ import './singleComic.scss';
 
 const SingleComic = ({data}) => {
     const {title, description, price, thumbnail, pageCount, language} = data;
+    
     return (
         <div className="single-comic">
             <Helmet>
