@@ -1,46 +1,11 @@
-import { useState, useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
-import useMarvelService from '../../../services/MarvelService';
-import ErrorMessage from '../../errorMessage/ErrorMessage';
-import Spinner from '../../spinner/Spinner';
 
 import './singleComic.scss';
 
-const SingleComic = () => {
-    const {comicId} = useParams();
-    const [comic, setComic] = useState([]);
-    const {loading, error, getComic, clearError} = useMarvelService();
 
-    useEffect(() => {
-        onRequest();
-    }, [comicId])
-
-    const onRequest = () => {
-        clearError();
-        getComic(comicId)
-            .then(onComicLoaded)
-    }
-
-    const onComicLoaded = (newComic) => {
-        setComic(newComic)
-    }
-
-    const errorMessage = error ? <ErrorMessage/> : null;
-    const spinner = loading ? <Spinner/> : null;
-    const content = !(loading || error || !comic) ? <View comic={comic}/> : null;
-
-    return (
-        <>
-            {errorMessage}
-            {spinner}
-            {content}
-        </>    
-    )
-}
-
-const View = ({comic}) => {
-    const {title, description, price, thumbnail, pageCount, language} = comic;
+const SingleComic = ({data}) => {
+    const {title, description, price, thumbnail, pageCount, language} = data;
     return (
         <div className="single-comic">
             <img src={thumbnail} alt={title} className="single-comic__img"/>
